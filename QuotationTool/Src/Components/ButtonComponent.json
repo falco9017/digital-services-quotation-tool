@@ -133,7 +133,7 @@
         "Name": "Icon4",
         "Parent": "ButtonComponent",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 338,
+        "PublishOrderIndex": 339,
         "Rules": [
           {
             "Category": "Design",
@@ -448,7 +448,7 @@
         "Name": "Label8",
         "Parent": "ButtonComponent",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 339,
+        "PublishOrderIndex": 340,
         "Rules": [
           {
             "Category": "Data",
