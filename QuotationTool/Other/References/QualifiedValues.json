@@ -1,0 +1,18 @@
+{
+  "QualifiedValues": [
+    {
+      "Kind": "default.cds_new_01_test_forms",
+      "Namespace": "01_Test (Forms)",
+      "Values": {
+        "Information": "acba5998-ded0-4f9d-a134-8449c5ae7b3d"
+      }
+    },
+    {
+      "Kind": "default.cds_new_1stflow_forms",
+      "Namespace": "1st flow (Forms)",
+      "Values": {
+        "Information": "f25f4ae5-9b3d-42aa-b47f-70747131171e"
+      }
+    }
+  ]
+}

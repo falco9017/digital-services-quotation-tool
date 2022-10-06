@@ -1,0 +1,24 @@
+Title As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =70
+    Width: =App.Width
+    X: =0
+    Y: =0
+    ZIndex: =2
+
+    Label2 As label:
+        Align: =Align.Center
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =4
+        FontWeight: =FontWeight.Bold
+        Height: =Parent.Height
+        Size: =20
+        Text: ="DIGITAL SERVICES QUOTATION TOOL"
+        Width: =Parent.Width
+        ZIndex: =1
+

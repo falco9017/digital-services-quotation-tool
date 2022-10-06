@@ -1,0 +1,48 @@
+FormFieldH As CanvasComponent:
+    FieldValue: ="Text"
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =100
+    Padding: =10
+    TextColor: =RGBA(0, 0, 0, 1)
+    Title: ="Text"
+    Width: =350
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Container11 As groupContainer.horizontalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =FormFieldH.Padding
+        PaddingLeft: =FormFieldH.Padding
+        PaddingRight: =FormFieldH.Padding
+        PaddingTop: =FormFieldH.Padding
+        Width: =Parent.Width
+        ZIndex: =1
+
+        title As label:
+            BorderColor: =
+            Color: =FormFieldH.TextColor
+            DisabledColor: =
+            FillPortions: =1
+            FontWeight: =FontWeight.Bold
+            PaddingBottom: =0
+            PaddingLeft: =10
+            PaddingTop: =0
+            Text: =FormFieldH.Title
+            Width: =175
+            ZIndex: =1
+
+        value As label:
+            BorderColor: =
+            Color: =FormFieldH.TextColor
+            DisabledColor: =
+            FillPortions: =1
+            PaddingBottom: =0
+            PaddingLeft: =10
+            PaddingTop: =0
+            Text: =FormFieldH.FieldValue
+            Width: =175
+            ZIndex: =2
+

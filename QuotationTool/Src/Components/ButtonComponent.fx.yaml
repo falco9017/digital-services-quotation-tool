@@ -1,0 +1,41 @@
+ButtonComponent As CanvasComponent:
+    ButtonText: ="Text"
+    Fill: =Self.FillColor
+    FillColor: =RGBA(0, 0, 255, 1)
+    Height: =60
+    Icon: |-
+        ={IconImage: Icon.Add}
+    TextColor: =RGBA(0, 0, 0, 1)
+    Width: =340
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Label8 As label:
+        BorderColor: =RGBA(0,0,0,0)
+        Color: =ButtonComponent.TextColor
+        DisabledBorderColor: =RGBA(0,0,0,0)
+        DisabledColor: =ButtonComponent.FillColor
+        FontWeight: =FontWeight.Bold
+        Height: =Parent.Height
+        Size: =20
+        Text: =ButtonComponent.ButtonText
+        Width: =Parent.Width-Parent.Height
+        X: =Parent.Height
+        ZIndex: =2
+
+    Icon4 As icon.Add:
+        BorderColor: =RGBA(0,0,0,0)
+        Color: =ButtonComponent.TextColor
+        DisabledBorderColor: =RGBA(0,0,0,0)
+        DisabledColor: =ButtonComponent.TextColor
+        FocusedBorderThickness: =0
+        Height: =Parent.Height
+        Icon: =ButtonComponent.Icon.IconImage
+        PaddingBottom: =10
+        PaddingLeft: =10
+        PaddingRight: =10
+        PaddingTop: =10
+        Width: =Parent.Height
+        ZIndex: =3
+

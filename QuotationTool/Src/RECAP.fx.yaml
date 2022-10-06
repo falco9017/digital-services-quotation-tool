@@ -1,0 +1,2707 @@
+RECAP As screen:
+    OnVisible: |-
+        =UpdateContext({popupVisible: false, expanded:"none"});
+        
+        If(Not(IsBlank(offerId)), Set(currentRecord, LookUp(Digital_Services, ID = Value(offerId, "en"))))
+
+    Container3_2 As groupContainer.verticalAutoLayoutContainer:
+        Height: =App.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =App.Width
+        ZIndex: =1
+
+        Title_4 As Title:
+            LayoutMinHeight: =640
+            LayoutMinWidth: =640
+            ZIndex: =1
+
+        Main As groupContainer.horizontalAutoLayoutContainer:
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =3
+
+            "Gallery As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                AlignInContainer: =AlignInContainer.SetByContainer
+                Default: =currentRecord
+                Fill: =RGBA(0,0,0,0)
+                Items: =Filter(Digital_Services, 'Created By'.Email=User().Email)
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =287
+                LayoutMinWidth: =320
+                OnSelect: =Set(currentRecord, ThisItem); Set(offerId, Blank());
+                TemplateFill: =RGBA(0,0,0,0)
+                TemplatePadding: =0
+                TemplateSize: =Min(104, Self.Height - 60)
+                ZIndex: =1
+
+                Selected_bg_1 As label:
+                    Fill: =If(ThisItem.IsSelected,Colors.Raised,RGBA(0,0,0,0))
+                    Height: =104
+                    OnSelect: =Select(Parent)
+                    Text: =
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                Title1_1 As label:
+                    Fill: =RGBA(0,0,0,0)
+                    Height: =Self.Size * 1.8
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =ThisItem.Cliente
+                    Width: =Parent.TemplateWidth - 104
+                    Wrap: =false
+                    X: =32
+                    Y: =16
+                    ZIndex: =2
+
+                Subtitle1_1 As label:
+                    Height: =Self.Size * 1.8
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =ThisItem.Created
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.TemplateWidth - 104
+                    X: =32
+                    Y: =Title1_1.Y + Title1_1.Height + 4
+                    ZIndex: =3
+
+                NextArrow1_1 As icon.ChevronRight:
+                    AccessibleLabel: =Self.Tooltip
+                    Height: =60
+                    Icon: =Icon.ChevronRight
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =10
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    TabIndex: =0
+                    Tooltip: ="View item details"
+                    Width: =60
+                    X: =Parent.TemplateWidth - Self.Width - 5
+                    Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                    ZIndex: =4
+
+                Separator1_1 As rectangle:
+                    Height: =1
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    Y: =Parent.TemplateHeight - 1
+                    ZIndex: =5
+
+            MainView As groupContainer.manualLayoutContainer:
+                Fill: =RGBA(0,0,0,0)
+                FillPortions: =3
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                ZIndex: =2
+
+                Container4 As groupContainer.verticalAutoLayoutContainer:
+                    Fill: =Colors.Raised
+                    Height: =Parent.Height
+                    LayoutAlignItems: =LayoutAlignItems.Stretch
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutMode: =LayoutMode.Auto
+                    LayoutOverflowX: =LayoutOverflow.Scroll
+                    LayoutOverflowY: =LayoutOverflow.Scroll
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                    GENERAL As groupContainer.manualLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        FillPortions: =1.5
+                        LayoutMinHeight: =220
+                        LayoutMinWidth: =250
+                        ZIndex: =1
+
+                        Container8 As groupContainer.horizontalAutoLayoutContainer:
+                            Height: =Parent.Height
+                            LayoutAlignItems: =LayoutAlignItems.Stretch
+                            LayoutMode: =LayoutMode.Auto
+                            Width: =Parent.Width
+                            ZIndex: =1
+
+                            generalData As groupContainer.manualLayoutContainer:
+                                LayoutMinHeight: =100
+                                LayoutMinWidth: =250
+                                ZIndex: =2
+
+                                RaisedWindow_1 As RaisedWindow:
+                                    Color: =Colors.Raised
+                                    Height: =Parent.Height
+                                    Width: =Parent.Width
+
+                                Container10 As groupContainer.verticalAutoLayoutContainer:
+                                    Height: =Parent.Height
+                                    LayoutAlignItems: =LayoutAlignItems.Stretch
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutMode: =LayoutMode.Auto
+                                    PaddingBottom: =Button.Padding
+                                    PaddingLeft: =Button.Padding
+                                    PaddingRight: =Button.Padding
+                                    PaddingTop: =Button.Padding
+                                    Width: =Parent.Width
+                                    ZIndex: =2
+
+                                    cliente As FormFieldH:
+                                        FieldValue: =Gallery.Selected.Cliente
+                                        FillPortions: =1
+                                        LayoutMinHeight: =10
+                                        LayoutMinWidth: =10
+                                        TextColor: =Colors.TextMain
+                                        Title: ="Cliente"
+
+                                    connessione As FormFieldH:
+                                        FieldValue: =Gallery.Selected.'Connessione remota'.Value
+                                        FillPortions: =1
+                                        LayoutMinHeight: =10
+                                        LayoutMinWidth: =10
+                                        TextColor: =Colors.TextMain
+                                        Title: ="Connessione remota"
+                                        ZIndex: =2
+
+                                    FormFieldH_1 As FormFieldH:
+                                        FieldValue: =Gallery.Selected.BMS.Value
+                                        FillPortions: =1
+                                        LayoutMinHeight: =10
+                                        LayoutMinWidth: =10
+                                        TextColor: =Colors.TextMain
+                                        Title: ="BMS"
+                                        ZIndex: =3
+
+                            soldi As groupContainer.manualLayoutContainer:
+                                FillPortions: =2
+                                LayoutMinHeight: =100
+                                LayoutMinWidth: =250
+                                ZIndex: =3
+
+                                RaisedWindow_2 As RaisedWindow:
+                                    Color: =Colors.Raised
+                                    Height: =Parent.Height
+                                    Width: =Parent.Width
+
+                                Container12 As groupContainer.horizontalAutoLayoutContainer:
+                                    Height: =Parent.Height
+                                    LayoutAlignItems: =LayoutAlignItems.Stretch
+                                    LayoutMode: =LayoutMode.Auto
+                                    PaddingBottom: =Button.Padding
+                                    PaddingLeft: =Button.Padding
+                                    PaddingRight: =Button.Padding
+                                    PaddingTop: =Button.Padding
+                                    Width: =Parent.Width
+                                    ZIndex: =2
+
+                                    Container13 As groupContainer.verticalAutoLayoutContainer:
+                                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                                        LayoutDirection: =LayoutDirection.Vertical
+                                        LayoutMinHeight: =100
+                                        LayoutMinWidth: =200
+                                        LayoutMode: =LayoutMode.Auto
+                                        ZIndex: =1
+
+                                        margineMis As FormFieldV:
+                                            FieldValue: =Gallery.Selected.'Margine messa in servizio'*100&"%"
+                                            FillPortions: =1
+                                            LayoutMinHeight: =10
+                                            LayoutMinWidth: =10
+                                            TextColor: =Colors.TextMain
+                                            Title: ="Margine Messa in servizio"
+
+                                        MargineY As FormFieldV:
+                                            FieldValue: =Gallery.Selected.'Margine annuale'*100&"%"
+                                            FillPortions: =1
+                                            LayoutMinHeight: =10
+                                            LayoutMinWidth: =10
+                                            TextColor: =Colors.TextMain
+                                            Title: ="Margine annuale"
+                                            ZIndex: =2
+
+                                    Container13_1 As groupContainer.verticalAutoLayoutContainer:
+                                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                                        LayoutDirection: =LayoutDirection.Vertical
+                                        LayoutMinHeight: =100
+                                        LayoutMinWidth: =200
+                                        LayoutMode: =LayoutMode.Auto
+                                        ZIndex: =2
+
+                                        FormFieldV_3 As FormFieldV:
+                                            FieldValue: =Round(Value(Gallery.Selected.'Costo messa in servizio TOTALE',"en"),0)&" €"
+                                            FillPortions: =1
+                                            LayoutMinHeight: =10
+                                            LayoutMinWidth: =10
+                                            TextColor: =Colors.TextMain
+                                            Title: ="TOT costo messa in servizio"
+
+                                        FormFieldV_4 As FormFieldV:
+                                            FieldValue: =Round(Value(Gallery.Selected.'Costo annuale TOTALE',"en"),0)&" €"
+                                            FillPortions: =1
+                                            LayoutMinHeight: =10
+                                            LayoutMinWidth: =10
+                                            TextColor: =Colors.TextMain
+                                            Title: ="TOT costo annuale"
+                                            ZIndex: =2
+
+                                    Container13_2 As groupContainer.verticalAutoLayoutContainer:
+                                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                                        LayoutDirection: =LayoutDirection.Vertical
+                                        LayoutMinHeight: =100
+                                        LayoutMinWidth: =200
+                                        LayoutMode: =LayoutMode.Auto
+                                        ZIndex: =3
+
+                                        FormFieldV_5 As FormFieldV:
+                                            FieldValue: =Round(Value(Gallery.Selected.'Vendita messa in servizio TOTALE',"en"),0)&" €"
+                                            FillPortions: =1
+                                            LayoutMinHeight: =10
+                                            LayoutMinWidth: =10
+                                            TextColor: =Colors.Primary1
+                                            Title: ="TOT vendita messa in servizio"
+
+                                        FormFieldV_6 As FormFieldV:
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            FieldValue: =Round(Value(Gallery.Selected.'Vendita annuale TOTALE',"en"),0)&" €"
+                                            FillPortions: =1
+                                            LayoutMinHeight: =10
+                                            LayoutMinWidth: =10
+                                            TextColor: =Colors.Primary1
+                                            Title: ="TOT vendita annuale"
+                                            Width: =Parent.Width
+                                            ZIndex: =2
+
+                    APA As groupContainer.manualLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        Visible: =Value(Gallery.Selected.'Vendita annuale APA',"en")>0
+                        ZIndex: =2
+
+                        RaisedWindow_3 As RaisedWindow:
+                            Color: =Colors.Raised
+                            Height: =Parent.Height
+                            Width: =Parent.Width
+
+                        Container14 As groupContainer.horizontalAutoLayoutContainer:
+                            Height: =Parent.Height
+                            LayoutAlignItems: =LayoutAlignItems.Center
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingBottom: =Button.Padding
+                            PaddingLeft: =Button.Padding
+                            PaddingRight: =Button.Padding
+                            PaddingTop: =Button.Padding
+                            Width: =Parent.Width
+                            ZIndex: =2
+
+                            Label1 As label:
+                                AutoHeight: =true
+                                FillPortions: =1.5
+                                FontWeight: =FontWeight.Bold
+                                Height: =150
+                                PaddingLeft: =25
+                                Text: ="Asset Performance Advisor"
+                                ZIndex: =1
+
+                            FormFieldH_2 As FormFieldH:
+                                FieldValue: =Round(Value(Gallery.Selected.'Vendita messa in servizio APA',"en"),0)&" €"
+                                FillPortions: =1
+                                LayoutMinHeight: =640
+                                LayoutMinWidth: =100
+                                TextColor: =Colors.TextMain
+                                Title: ="Vendita MIS"
+                                Width: =200
+                                ZIndex: =2
+
+                            FormFieldH_3 As FormFieldH:
+                                FieldValue: =Round(Value(Gallery.Selected.'Vendita annuale APA',"en"),0)&" €"
+                                FillPortions: =1
+                                LayoutMinHeight: =640
+                                LayoutMinWidth: =100
+                                TextColor: =Colors.TextMain
+                                Title: ="Vendita annuale"
+                                Width: =200
+                                ZIndex: =3
+
+                            Icon2 As icon.ChevronRight:
+                                Height: =50
+                                Icon: =Icon.ChevronRight
+                                OnSelect: |-
+                                    =UpdateContext({expanded:"APA"})
+                                Width: =50
+                                ZIndex: =4
+
+                    EPI As groupContainer.manualLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        Visible: =Value(Gallery.Selected.'Vendita annuale EPI',"en")>0
+                        ZIndex: =5
+
+                        RaisedWindow_7 As RaisedWindow:
+                            Color: =Colors.Raised
+                            Height: =Parent.Height
+                            Width: =Parent.Width
+
+                        Container14_3 As groupContainer.horizontalAutoLayoutContainer:
+                            Height: =Parent.Height
+                            LayoutAlignItems: =LayoutAlignItems.Center
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingBottom: =Button.Padding
+                            PaddingLeft: =Button.Padding
+                            PaddingRight: =Button.Padding
+                            PaddingTop: =Button.Padding
+                            Width: =Parent.Width
+                            ZIndex: =2
+
+                            Label1_3 As label:
+                                AutoHeight: =true
+                                FillPortions: =1.5
+                                FontWeight: =FontWeight.Bold
+                                Height: =150
+                                PaddingLeft: =25
+                                Text: ="Energy Performance Insights"
+                                ZIndex: =1
+
+                            FormFieldH_4 As FormFieldH:
+                                FieldValue: =Round(Value(Gallery.Selected.'Vendita messa in servizio EPI',"en"),0)&" €"
+                                FillPortions: =1
+                                LayoutMinHeight: =640
+                                LayoutMinWidth: =100
+                                TextColor: =Colors.TextMain
+                                Title: ="Vendita MIS"
+                                Width: =200
+                                ZIndex: =2
+
+                            FormFieldH_5 As FormFieldH:
+                                FieldValue: =Round(Value(Gallery.Selected.'Vendita annuale EPI',"en"),0)&" €"
+                                FillPortions: =1
+                                LayoutMinHeight: =640
+                                LayoutMinWidth: =100
+                                TextColor: =Colors.TextMain
+                                Title: ="Vendita anuale"
+                                Width: =200
+                                ZIndex: =3
+
+                            Icon2_3 As icon.ChevronRight:
+                                Height: =50
+                                Icon: =Icon.ChevronRight
+                                OnSelect: |-
+                                    =UpdateContext({expanded:"EPI"})
+                                Width: =50
+                                ZIndex: =4
+
+                    DP As groupContainer.manualLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        Visible: =Value(Gallery.Selected.'Vendita annuale DP',"en")>0
+                        ZIndex: =6
+
+                        RaisedWindow_8 As RaisedWindow:
+                            Color: =Colors.Raised
+                            Height: =Parent.Height
+                            Width: =Parent.Width
+
+                        Container14_4 As groupContainer.horizontalAutoLayoutContainer:
+                            Height: =Parent.Height
+                            LayoutAlignItems: =LayoutAlignItems.Center
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingBottom: =Button.Padding
+                            PaddingLeft: =Button.Padding
+                            PaddingRight: =Button.Padding
+                            PaddingTop: =Button.Padding
+                            Width: =Parent.Width
+                            ZIndex: =2
+
+                            Label1_4 As label:
+                                AutoHeight: =true
+                                FillPortions: =1.5
+                                FontWeight: =FontWeight.Bold
+                                Height: =150
+                                PaddingLeft: =25
+                                Text: ="Desigo Performance"
+                                ZIndex: =1
+
+                            FormFieldH_6 As FormFieldH:
+                                FieldValue: =Round(Value(Gallery.Selected.'Vendita messa in servizio DP',"en"),0)&" €"
+                                FillPortions: =1
+                                LayoutMinHeight: =640
+                                LayoutMinWidth: =100
+                                TextColor: =Colors.TextMain
+                                Title: ="Vendita MIS"
+                                Width: =200
+                                ZIndex: =2
+
+                            FormFieldH_7 As FormFieldH:
+                                FieldValue: =Round(Value(Gallery.Selected.'Vendita annuale DP',"en"),0)&" €"
+                                FillPortions: =1
+                                LayoutMinHeight: =640
+                                LayoutMinWidth: =100
+                                TextColor: =Colors.TextMain
+                                Title: ="Vendita MIS"
+                                Width: =200
+                                ZIndex: =3
+
+                            Icon2_4 As icon.ChevronRight:
+                                Height: =50
+                                Icon: =Icon.ChevronRight
+                                OnSelect: |-
+                                    =UpdateContext({expanded:"DP"})
+                                Width: =50
+                                ZIndex: =4
+
+                    ZPO As groupContainer.manualLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        Visible: =Value(Gallery.Selected.'Vendita annuale ZPO',"en")>0
+                        ZIndex: =7
+
+                        RaisedWindow_9 As RaisedWindow:
+                            Color: =Colors.Raised
+                            Height: =Parent.Height
+                            Width: =Parent.Width
+
+                        Container14_5 As groupContainer.horizontalAutoLayoutContainer:
+                            Height: =Parent.Height
+                            LayoutAlignItems: =LayoutAlignItems.Center
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingBottom: =Button.Padding
+                            PaddingLeft: =Button.Padding
+                            PaddingRight: =Button.Padding
+                            PaddingTop: =Button.Padding
+                            Width: =Parent.Width
+                            ZIndex: =2
+
+                            Label1_5 As label:
+                                AutoHeight: =true
+                                FillPortions: =1.5
+                                FontWeight: =FontWeight.Bold
+                                Height: =150
+                                PaddingLeft: =25
+                                Text: ="Zone Performance Optimization"
+                                ZIndex: =1
+
+                            FormFieldH_8 As FormFieldH:
+                                FieldValue: =Round(Value(Gallery.Selected.'Vendita messa in servizio ZPO',"en"),0)&" €"
+                                FillPortions: =1
+                                LayoutMinHeight: =640
+                                LayoutMinWidth: =100
+                                TextColor: =Colors.TextMain
+                                Title: ="Vendita MIS"
+                                Width: =200
+                                ZIndex: =2
+
+                            FormFieldH_9 As FormFieldH:
+                                FieldValue: =Round(Value(Gallery.Selected.'Vendita annuale ZPO',"en"),0)&" €"
+                                FillPortions: =1
+                                LayoutMinHeight: =640
+                                LayoutMinWidth: =100
+                                TextColor: =Colors.TextMain
+                                Title: ="Vendita MIS"
+                                Width: =200
+                                ZIndex: =3
+
+                            Icon2_5 As icon.ChevronRight:
+                                Height: =50
+                                Icon: =Icon.ChevronRight
+                                OnSelect: |-
+                                    =UpdateContext({expanded:"ZPO"})
+                                Width: =50
+                                ZIndex: =4
+
+                detailed As groupContainer.manualLayoutContainer:
+                    Fill: =ColorFade(Colors.White, 8%)
+                    Height: =Parent.Height
+                    Visible: =expanded<>"none"
+                    Width: =Parent.Width
+                    ZIndex: =2
+
+                    RaisedWindow_4 As RaisedWindow:
+                        Color: =Colors.Raised
+                        Height: =Parent.Height
+                        Width: =Parent.Width
+
+                    close As icon.Cancel:
+                        Height: =50
+                        Icon: =Icon.Cancel
+                        OnSelect: |-
+                            =UpdateContext({expanded:"none"})
+                        Width: =50
+                        X: =(Parent.Width-Self.Width)/2
+                        Y: =Parent.Height-Self.Height*2
+                        ZIndex: =2
+
+                    APA_detailed As formViewer:
+                        DataSource: =Digital_Services
+                        Height: =Parent.Height-100
+                        Item: =Gallery.Selected
+                        Visible: =expanded="APA"
+                        Width: =Parent.Width-Button.Padding*2
+                        X: =Button.Padding
+                        Y: =Button.Padding
+                        ZIndex: =3
+
+                        UTA_DataCard2 As typedDataCard.textualViewCard:
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="UTA"
+                            Default: =ThisItem.UTA
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"UTA")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =335
+                            WidthFit: =true
+                            X: =0
+                            Y: =0
+                            ZIndex: =3
+
+                            DataCardKey22 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue22 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey22.Y + DataCardKey22.Height + 5
+                                ZIndex: =2
+
+                        Caldaie_DataCard2 As typedDataCard.textualViewCard:
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Caldaie"
+                            Default: =ThisItem.Caldaie
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Caldaie")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =335
+                            WidthFit: =true
+                            X: =1
+                            Y: =0
+                            ZIndex: =3
+
+                            DataCardKey23 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue23 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey23.Y + DataCardKey23.Height + 5
+                                ZIndex: =2
+
+                        "'Gruppi frigoriferi_DataCard2' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Gruppifrigoriferi"
+                            Default: =ThisItem.'Gruppi frigoriferi'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Gruppifrigoriferi")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =335
+                            WidthFit: =true
+                            X: =2
+                            Y: =0
+                            ZIndex: =3
+
+                            DataCardKey24 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue24 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey24.Y + DataCardKey24.Height + 5
+                                ZIndex: =2
+
+                        "'Torri evaporative_DataCard2' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Torrievaporative"
+                            Default: =ThisItem.'Torri evaporative'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Torrievaporative")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =335
+                            WidthFit: =true
+                            X: =0
+                            Y: =1
+                            ZIndex: =3
+
+                            DataCardKey25 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue25 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey25.Y + DataCardKey25.Height + 5
+                                ZIndex: =2
+
+                        "'Pompe di calore_DataCard2' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Pompedicalore"
+                            Default: =ThisItem.'Pompe di calore'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Pompedicalore")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =335
+                            WidthFit: =true
+                            X: =1
+                            Y: =1
+                            ZIndex: =3
+
+                            DataCardKey26 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue26 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey26.Y + DataCardKey26.Height + 5
+                                ZIndex: =2
+
+                        VAV_DataCard2 As typedDataCard.textualViewCard:
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="VAV"
+                            Default: =ThisItem.VAV
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"VAV")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =335
+                            WidthFit: =true
+                            X: =2
+                            Y: =1
+                            ZIndex: =3
+
+                            DataCardKey27 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue27 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey27.Y + DataCardKey27.Height + 5
+                                ZIndex: =2
+
+                        "'Fan coil_DataCard2' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Fancoil"
+                            Default: =ThisItem.'Fan coil'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Fancoil")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =335
+                            WidthFit: =true
+                            X: =0
+                            Y: =2
+                            ZIndex: =3
+
+                            DataCardKey28 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue28 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey28.Y + DataCardKey28.Height + 5
+                                ZIndex: =2
+
+                        "'Boiler per ACS_DataCard2' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="BoilerperACS"
+                            Default: =ThisItem.'Boiler per ACS'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"BoilerperACS")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =335
+                            WidthFit: =true
+                            X: =1
+                            Y: =2
+                            ZIndex: =3
+
+                            DataCardKey29 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue29 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey29.Y + DataCardKey29.Height + 5
+                                ZIndex: =2
+
+                        "'Nr report annuali APA_DataCard2' As typedDataCard.comboBoxViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="NrreportannualiAPA"
+                            Default: =ThisItem.'Frequenza report APA'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"NrreportannualiAPA")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =50
+                            Required: =false
+                            Update: =DataCardValue30.Selected
+                            Width: =335
+                            WidthFit: =true
+                            X: =2
+                            Y: =2
+                            ZIndex: =3
+
+                            DataCardKey30 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue30 As combobox:
+                                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                DefaultSelectedItems: =Parent.Default
+                                DisplayFields: =["Value"]
+                                DisplayMode: =Parent.DisplayMode
+                                Fill: =RGBA(0,0,0,0)
+                                Items: =Choices([@Digital_Services].'Frequenza report APA')
+                                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                                SearchFields: =["Value"]
+                                SearchItems: =Choices(Digital_Services.'Frequenza report APA',DataCardValue30.SearchText)
+                                SelectMultiple: =false
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey30.Y + DataCardKey30.Height + 5
+                                ZIndex: =2
+
+                            ErrorMessage18 As label:
+                                AutoHeight: =true
+                                Height: =10
+                                Live: =Live.Assertive
+                                PaddingBottom: =0
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Error
+                                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardValue30.Y + DataCardValue30.Height
+                                ZIndex: =3
+
+                            StarVisible18 As label:
+                                Align: =Align.Center
+                                Height: =DataCardKey30.Height
+                                Text: ="*"
+                                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                Width: =30
+                                Wrap: =false
+                                Y: =DataCardKey30.Y
+                                ZIndex: =4
+
+                        "'costo annuale APA_DataCard1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="costo_x0020_messa_x0020_in_x0020"
+                            Default: =ThisItem.'Costo annuale APA'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"costo_x0020_messa_x0020_in_x0020")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =335
+                            WidthFit: =true
+                            X: =0
+                            Y: =3
+                            ZIndex: =3
+
+                            DataCardKey33 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue33 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Round(Value(Parent.Default,"en"),0)&" €"
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey33.Y + DataCardKey33.Height + 5
+                                ZIndex: =2
+
+                        "'costo messa in servizio APA_DataCard1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="costo_x0020_startup_x0020_APA"
+                            Default: =ThisItem.'Costo messa in servizio APA'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"costo_x0020_startup_x0020_APA")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =335
+                            WidthFit: =true
+                            X: =1
+                            Y: =3
+                            ZIndex: =3
+
+                            DataCardKey34 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue34 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Round(Value(Parent.Default,"en"),0)&" €"
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey34.Y + DataCardKey34.Height + 5
+                                ZIndex: =2
+
+                        "'vendita messa in servizio APA_DataCard1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="vendita_x0020_startup_x0020_APA"
+                            Default: =ThisItem.'Vendita messa in servizio APA'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"vendita_x0020_startup_x0020_APA")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =335
+                            WidthFit: =true
+                            X: =2
+                            Y: =3
+                            ZIndex: =3
+
+                            DataCardKey35 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue35 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Round(Value(Parent.Default,"en"),0)&" €"
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey35.Y + DataCardKey35.Height + 5
+                                ZIndex: =2
+
+                        "'vendita annuale APA_DataCard1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="vendita_x0020_annuale_x0020_APA"
+                            Default: =ThisItem.'Vendita annuale APA'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"vendita_x0020_annuale_x0020_APA")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =335
+                            WidthFit: =true
+                            X: =0
+                            Y: =4
+                            ZIndex: =3
+
+                            DataCardKey36 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue36 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Round(Value(Parent.Default,"en"),0)&" €"
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey36.Y + DataCardKey36.Height + 5
+                                ZIndex: =2
+
+                    EPI_detailed As formViewer:
+                        DataSource: =Digital_Services
+                        Height: =Parent.Height-100
+                        Item: =Gallery.Selected
+                        NumberOfColumns: =1
+                        Visible: =expanded="EPI"
+                        Width: =Parent.Width-Button.Padding*2
+                        X: =Button.Padding
+                        Y: =Button.Padding
+                        ZIndex: =4
+
+                        "'Numero di misure energetiche_DataCard1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Numero_x0020_di_x0020_misure_x00"
+                            Default: =ThisItem.'Numero di misure energetiche'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Numero_x0020_di_x0020_misure_x00")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =0
+                            ZIndex: =5
+
+                            DataCardKey21 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue21 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey21.Y + DataCardKey21.Height + 5
+                                ZIndex: =2
+
+                        "'Report energetico (opzionale)_DataCard1' As typedDataCard.comboBoxViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Report_x0020_energetico_x0020__x"
+                            Default: =ThisItem.'Report energetico (opzionale)'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Report_x0020_energetico_x0020__x")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =50
+                            Required: =false
+                            Update: =DataCardValue31.Selected
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =1
+                            ZIndex: =5
+
+                            DataCardKey31 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue31 As combobox:
+                                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                DefaultSelectedItems: =Parent.Default
+                                DisplayFields: =["Value"]
+                                DisplayMode: =Parent.DisplayMode
+                                Fill: =RGBA(0,0,0,0)
+                                FontWeight: =FontWeight.Lighter
+                                Items: =Choices([@Digital_Services].Report_x0020_energetico_x0020__x)
+                                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                                SearchFields: =["Value"]
+                                SearchItems: =Choices(Digital_Services.Report_x0020_energetico_x0020__x,DataCardValue31.SearchText)
+                                SelectMultiple: =false
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey31.Y + DataCardKey31.Height + 5
+                                ZIndex: =2
+
+                            ErrorMessage4 As label:
+                                AutoHeight: =true
+                                Height: =10
+                                Live: =Live.Assertive
+                                PaddingBottom: =0
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Error
+                                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardValue31.Y + DataCardValue31.Height
+                                ZIndex: =3
+
+                            StarVisible4 As label:
+                                Align: =Align.Center
+                                Height: =DataCardKey31.Height
+                                Text: ="*"
+                                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                Width: =30
+                                Wrap: =false
+                                Y: =DataCardKey31.Y
+                                ZIndex: =4
+
+                        "'Costo messa in servizio EPI_DataCard1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="costo_x0020_messa_x0020_in_x00200"
+                            Default: =Round(Value(ThisItem.'Costo messa in servizio EPI',"en"),0)&" €"
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"costo_x0020_messa_x0020_in_x00200")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =2
+                            ZIndex: =5
+
+                            DataCardKey32 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue32 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey32.Y + DataCardKey32.Height + 5
+                                ZIndex: =2
+
+                        "'Costo annuale EPI_DataCard1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="costo_x0020_annuale_x0020_EPI"
+                            Default: =Round(Value(ThisItem.'Costo annuale EPI',"en"),0)&" €"
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"costo_x0020_annuale_x0020_EPI")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =3
+                            ZIndex: =5
+
+                            DataCardKey37 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue37 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey37.Y + DataCardKey37.Height + 5
+                                ZIndex: =2
+
+                        "'Vendita messa in servizio EPI_DataCard1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="vendita_x0020_messa_x0020_in_x00"
+                            Default: =Round(Value(ThisItem.'Vendita messa in servizio EPI',"en"),0)&" €"
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"vendita_x0020_messa_x0020_in_x00")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =4
+                            ZIndex: =5
+
+                            DataCardKey38 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue38 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey38.Y + DataCardKey38.Height + 5
+                                ZIndex: =2
+
+                        "'Vendita annuale EPI_DataCard1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="vendita_x0020_annuale_x0020_EPI"
+                            Default: =Round(Value(ThisItem.'Vendita annuale EPI',"en"),0)&" €"
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"vendita_x0020_annuale_x0020_EPI")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =5
+                            ZIndex: =5
+
+                            DataCardKey39 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue39 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey39.Y + DataCardKey39.Height + 5
+                                ZIndex: =2
+
+                    DP_detailed As formViewer:
+                        DataSource: =Digital_Services
+                        Height: =Parent.Height-100
+                        Item: =Gallery.Selected
+                        NumberOfColumns: =1
+                        Visible: =expanded="DP"
+                        Width: =Parent.Width-Button.Padding*2
+                        X: =Button.Padding
+                        Y: =Button.Padding
+                        ZIndex: =5
+
+                        "'Numero di datapoints Desigo CC_DataCard3' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Numero_x0020_di_x0020_datapoints"
+                            Default: =ThisItem.'Numero di datapoints Desigo CC'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Numero_x0020_di_x0020_datapoints")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =0
+                            ZIndex: =6
+
+                            DataCardKey105 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue105 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey105.Y + DataCardKey105.Height + 5
+                                ZIndex: =2
+
+                        "'Frequenza report DP_DataCard3' As typedDataCard.comboBoxViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Numero_x0020_di_x0020_report_x00"
+                            Default: =ThisItem.'Frequenza report DP'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Numero_x0020_di_x0020_report_x00")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =50
+                            Required: =false
+                            Update: =DataCardValue106.Selected
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =1
+                            ZIndex: =6
+
+                            DataCardKey106 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue106 As combobox:
+                                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                DefaultSelectedItems: =Parent.Default
+                                DisplayFields: =["Value"]
+                                DisplayMode: =Parent.DisplayMode
+                                Fill: =RGBA(0,0,0,0)
+                                Items: =Choices([@Digital_Services].Numero_x0020_di_x0020_report_x00)
+                                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                                SearchFields: =["Value"]
+                                SearchItems: =Choices(Digital_Services.Numero_x0020_di_x0020_report_x00,DataCardValue106.SearchText)
+                                SelectMultiple: =false
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey106.Y + DataCardKey106.Height + 5
+                                ZIndex: =2
+
+                            ErrorMessage11 As label:
+                                AutoHeight: =true
+                                Height: =10
+                                Live: =Live.Assertive
+                                PaddingBottom: =0
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Error
+                                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardValue106.Y + DataCardValue106.Height
+                                ZIndex: =3
+
+                            StarVisible11 As label:
+                                Align: =Align.Center
+                                Height: =DataCardKey106.Height
+                                Text: ="*"
+                                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                Width: =30
+                                Wrap: =false
+                                Y: =DataCardKey106.Y
+                                ZIndex: =4
+
+                        "'Costo messa in servizio DP_DataCard2' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="costo_x0020_messa_x0020_in_x00201"
+                            Default: =Round(Value(ThisItem.'Costo messa in servizio DP',"en"),0)&" €"
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"costo_x0020_messa_x0020_in_x00201")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =2
+                            ZIndex: =6
+
+                            DataCardKey107 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue107 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey107.Y + DataCardKey107.Height + 5
+                                ZIndex: =2
+
+                        "'Costo annuale DP_DataCard2' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Costo_x0020_annuale_x0020_DP"
+                            Default: =Round(Value(ThisItem.'Costo annuale DP',"en"),0)&" €"
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Costo_x0020_annuale_x0020_DP")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =3
+                            ZIndex: =6
+
+                            DataCardKey108 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue108 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey108.Y + DataCardKey108.Height + 5
+                                ZIndex: =2
+
+                        "'Vendita messa in servizio DP_DataCard2' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Vendita_x0020_messa_x0020_in_x000"
+                            Default: =Round(Value(ThisItem.'Vendita messa in servizio DP',"en"),0)&" €"
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Vendita_x0020_messa_x0020_in_x000")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =4
+                            ZIndex: =6
+
+                            DataCardKey109 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue109 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey109.Y + DataCardKey109.Height + 5
+                                ZIndex: =2
+
+                        "'Vendita annuale DP_DataCard2' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Vendita_x0020_annuale_x0020_DP"
+                            Default: =Round(Value(ThisItem.'Vendita annuale DP',"en"),0)&" €"
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Vendita_x0020_annuale_x0020_DP")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =5
+                            ZIndex: =6
+
+                            DataCardKey110 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue110 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey110.Y + DataCardKey110.Height + 5
+                                ZIndex: =2
+
+                    ZPO_detailed As formViewer:
+                        DataSource: =Digital_Services
+                        Height: =Parent.Height-100
+                        Item: =Gallery.Selected
+                        NumberOfColumns: =1
+                        Visible: =expanded="ZPO"
+                        Width: =Parent.Width-Button.Padding*2
+                        X: =Button.Padding
+                        Y: =Button.Padding
+                        ZIndex: =6
+
+                        "'Numero di ambienti_DataCard3_1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Numero_x0020_di_x0020_ambienti"
+                            Default: =ThisItem.'Numero di ambienti'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Numero_x0020_di_x0020_ambienti")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =0
+                            ZIndex: =6
+
+                            DataCardKey111_1 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue111_1 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey111_1.Y + DataCardKey111_1.Height + 5
+                                ZIndex: =2
+
+                        "'Frequenza report ZPO_DataCard3_1' As typedDataCard.comboBoxViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Frequenza_x0020_report_x0020_ZPO"
+                            Default: =ThisItem.'Frequenza report ZPO'
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Frequenza_x0020_report_x0020_ZPO")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =50
+                            Required: =false
+                            Update: =DataCardValue112_1.Selected
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =1
+                            ZIndex: =6
+
+                            DataCardKey112_1 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue112_1 As combobox:
+                                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                DefaultSelectedItems: =Parent.Default
+                                DisplayFields: =["Value"]
+                                DisplayMode: =Parent.DisplayMode
+                                Fill: =RGBA(0,0,0,0)
+                                Items: =Choices([@Digital_Services].Frequenza_x0020_report_x0020_ZPO)
+                                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                                SearchFields: =["Value"]
+                                SearchItems: =Choices(Digital_Services.Frequenza_x0020_report_x0020_ZPO,DataCardValue112_1.SearchText)
+                                SelectMultiple: =false
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey112_1.Y + DataCardKey112_1.Height + 5
+                                ZIndex: =2
+
+                            ErrorMessage12_1 As label:
+                                AutoHeight: =true
+                                Height: =10
+                                Live: =Live.Assertive
+                                PaddingBottom: =0
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Error
+                                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardValue112_1.Y + DataCardValue112_1.Height
+                                ZIndex: =3
+
+                            StarVisible12_1 As label:
+                                Align: =Align.Center
+                                Height: =DataCardKey112_1.Height
+                                Text: ="*"
+                                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                Width: =30
+                                Wrap: =false
+                                Y: =DataCardKey112_1.Y
+                                ZIndex: =4
+
+                        "'Costo messa in servizio ZPO_DataCard2_1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Costo_x0020_messa_x0020_in_x00202"
+                            Default: =Round(Value(ThisItem.'Costo messa in servizio ZPO',"en"),0)&" €"
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Costo_x0020_messa_x0020_in_x00202")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =2
+                            ZIndex: =6
+
+                            DataCardKey113_1 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue113_1 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey113_1.Y + DataCardKey113_1.Height + 5
+                                ZIndex: =2
+
+                        "'Costo annuale ZPO_DataCard2_1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Costo_x0020_annuale_x0020_ZPO"
+                            Default: =Round(Value(ThisItem.'Costo annuale ZPO',"en"),0)&" €"
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Costo_x0020_annuale_x0020_ZPO")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =3
+                            ZIndex: =6
+
+                            DataCardKey114_1 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue114_1 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey114_1.Y + DataCardKey114_1.Height + 5
+                                ZIndex: =2
+
+                        "'Vendita messa in servizio ZPO_DataCard2_1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Vendita_x0020_messa_x0020_in_x001"
+                            Default: =Round(Value(ThisItem.'Vendita messa in servizio ZPO',"en"),0)&" €"
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Vendita_x0020_messa_x0020_in_x001")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =4
+                            ZIndex: =6
+
+                            DataCardKey115_1 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue115_1 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey115_1.Y + DataCardKey115_1.Height + 5
+                                ZIndex: =2
+
+                        "'Vendita annuale ZPO_DataCard2_1' As typedDataCard.textualViewCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Vendita_x0020_annuale_x0020_ZPO"
+                            Default: =Round(Value(ThisItem.'Vendita annuale ZPO',"en"),0)&" €"
+                            DisplayMode: =DisplayMode.View
+                            DisplayName: =DataSourceInfo([@Digital_Services],DataSourceInfo.DisplayName,"Vendita_x0020_annuale_x0020_ZPO")
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =40
+                            Required: =false
+                            Width: =1005
+                            WidthFit: =true
+                            X: =0
+                            Y: =5
+                            ZIndex: =6
+
+                            DataCardKey116_1 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DataCardValue116_1 As label:
+                                AutoHeight: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =27
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Default
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardKey116_1.Y + DataCardKey116_1.Height + 5
+                                ZIndex: =2
+
+        Footer_recap_1 As groupContainer.manualLayoutContainer:
+            FillPortions: =0
+            Height: =80
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            Width: =Parent.Width
+            ZIndex: =5
+
+            modify_1 As icon.BackArrow:
+                BorderColor: =RGBA(85, 106, 129, 1)
+                Color: =RGBA(0, 255, 185, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(220, 220, 220, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                Height: =50
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =ColorFade(RGBA(0, 188, 242, 1), 30%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Icon: =Icon.Trash
+                OnSelect: |-
+                    =UpdateContext({popupVisible:true})
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedColor: =ColorFade(RGBA(0, 188, 242, 1), 30%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                Tooltip: ="Elimina quotazione"
+                Width: =50
+                X: =Self.Width
+                Y: =(Parent.Height-Self.Height)/2
+                ZIndex: =1
+
+            new_1 As icon.CheckBadge:
+                BorderColor: =RGBA(85, 106, 129, 1)
+                Color: =RGBA(0, 255, 185, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(220, 220, 220, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                Height: =50
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =ColorFade(RGBA(0, 188, 242, 1), 30%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Icon: =Icon.Add
+                OnSelect: |-
+                    =ResetForm(Form_MAIN);
+                    NewForm(Form_MAIN);
+                    Navigate(MAIN, Cover)
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedColor: =ColorFade(RGBA(0, 188, 242, 1), 30%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                Tooltip: ="Nuova quotazione"
+                Width: =50
+                X: =(Parent.Width-2*Self.Width)
+                Y: =(Parent.Height-Self.Height)/2
+                ZIndex: =3
+
+            delete_1 As icon.BackArrow:
+                BorderColor: =RGBA(85, 106, 129, 1)
+                Color: =RGBA(0, 255, 185, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(220, 220, 220, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                Height: =50
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =ColorFade(RGBA(0, 188, 242, 1), 30%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Icon: =Icon.Edit
+                OnSelect: =EditForm(Form_MAIN);Navigate(MAIN, Cover)
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedColor: =ColorFade(RGBA(0, 188, 242, 1), 30%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                Tooltip: ="Modifica quotazione"
+                Width: =50
+                X: =Self.Width*2.5
+                Y: =(Parent.Height-Self.Height)/2
+                ZIndex: =4
+
+            email As icon.BackArrow:
+                BorderColor: =RGBA(85, 106, 129, 1)
+                Color: =RGBA(0, 255, 185, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(220, 220, 220, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                Height: =50
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =ColorFade(RGBA(0, 188, 242, 1), 30%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Icon: =Icon.Mail
+                OnSelect: |-
+                    =Office365Outlook.SendEmailV2(User().Email,
+                    "Quotazione Servizi DIgitali per "&Gallery.Selected.Cliente,"<body
+                        style=""
+                          width: 100%;
+                          font-family: arial, 'helvetica neue', helvetica, sans-serif;
+                          -webkit-text-size-adjust: 100%;
+                          -ms-text-size-adjust: 100%;
+                          padding: 0;
+                          margin: 0;
+                        ""
+                      >
+                        <div class=""es-wrapper-color"" style=""background-color: #f6f6f6"">
+                          <!--[if gte mso 9
+                            ]><v:background xmlns:v=""urn:schemas-microsoft-com:vml"" fill=""t"">
+                              <v:fill type=""tile"" color=""#f6f6f6""></v:fill> </v:background
+                          ><![endif]-->
+                          <table
+                            class=""es-wrapper""
+                            width=""100%""
+                            cellspacing=""0""
+                            cellpadding=""0""
+                            style=""
+                              mso-table-lspace: 0pt;
+                              mso-table-rspace: 0pt;
+                              border-collapse: collapse;
+                              border-spacing: 0px;
+                              padding: 0;
+                              margin: 0;
+                              width: 100%;
+                              height: 100%;
+                              background-repeat: repeat;
+                              background-position: center top;
+                            ""
+                          >
+                            <tr>
+                              <td valign=""top"" style=""padding: 0; margin: 0"">
+                                <table
+                                  class=""es-header""
+                                  cellspacing=""0""
+                                  cellpadding=""0""
+                                  align=""center""
+                                  style=""
+                                    mso-table-lspace: 0pt;
+                                    mso-table-rspace: 0pt;
+                                    border-collapse: collapse;
+                                    border-spacing: 0px;
+                                    table-layout: fixed !important;
+                                    width: 100%;
+                                    background-color: transparent;
+                                    background-repeat: repeat;
+                                    background-position: center top;
+                                  ""
+                                >
+                                  <tr>
+                                    <td align=""center"" style=""padding: 0; margin: 0"">
+                                      <table
+                                        class=""es-header-body""
+                                        cellspacing=""0""
+                                        cellpadding=""0""
+                                        bgcolor=""#ffffff""
+                                        align=""center""
+                                        style=""
+                                          mso-table-lspace: 0pt;
+                                          mso-table-rspace: 0pt;
+                                          border-collapse: collapse;
+                                          border-spacing: 0px;
+                                          background-color: #ffffff;
+                                          width: 600px;
+                                        ""
+                                      >
+                                        <tr>
+                                          <td
+                                            align=""left""
+                                            bgcolor=""#000028""
+                                            style=""
+                                              margin: 0;
+                                              padding-bottom: 20px;
+                                              padding-left: 20px;
+                                              padding-right: 20px;
+                                              padding-top: 40px;
+                                              background-color: #000028;
+                                            ""
+                                          >
+                                            <table
+                                              cellspacing=""0""
+                                              cellpadding=""0""
+                                              width=""100%""
+                                              style=""
+                                                mso-table-lspace: 0pt;
+                                                mso-table-rspace: 0pt;
+                                                border-collapse: collapse;
+                                                border-spacing: 0px;
+                                              ""
+                                            >
+                                              <tr>
+                                                <td
+                                                  class=""es-m-p0r""
+                                                  valign=""top""
+                                                  align=""center""
+                                                  style=""padding: 0; margin: 0; width: 560px""
+                                                >
+                                                  <table
+                                                    width=""100%""
+                                                    cellspacing=""0""
+                                                    cellpadding=""0""
+                                                    style=""
+                                                      mso-table-lspace: 0pt;
+                                                      mso-table-rspace: 0pt;
+                                                      border-collapse: collapse;
+                                                      border-spacing: 0px;
+                                                    ""
+                                                  >
+                                                    <tr>
+                                                      <td
+                                                        align=""left""
+                                                        style=""padding: 0; margin: 0""
+                                                      >
+                                                        <h1
+                                                          style=""
+                                                            margin: 0;
+                                                            line-height: 48px;
+                                                            mso-line-height-rule: exactly;
+                                                            font-family: arial, 'helvetica neue',
+                                                              helvetica, sans-serif;
+                                                            font-size: 40px;
+                                                            font-style: normal;
+                                                            font-weight: normal;
+                                                            color: #ffffff;
+                                                          ""
+                                                        >
+                                                          Digital Services<br />Quotation Tool
+                                                        </h1>
+                                                      </td>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                                <table
+                                  class=""es-content""
+                                  cellspacing=""0""
+                                  cellpadding=""0""
+                                  align=""center""
+                                  style=""
+                                    mso-table-lspace: 0pt;
+                                    mso-table-rspace: 0pt;
+                                    border-collapse: collapse;
+                                    border-spacing: 0px;
+                                    table-layout: fixed !important;
+                                    width: 100%;
+                                  ""
+                                >
+                                  <tr>
+                                    <td align=""center"" style=""padding: 0; margin: 0"">
+                                      <table
+                                        class=""es-content-body""
+                                        cellspacing=""0""
+                                        cellpadding=""0""
+                                        bgcolor=""#ffffff""
+                                        align=""center""
+                                        style=""
+                                          mso-table-lspace: 0pt;
+                                          mso-table-rspace: 0pt;
+                                          border-collapse: collapse;
+                                          border-spacing: 0px;
+                                          background-color: #ffffff;
+                                          width: 600px;
+                                        ""
+                                      >
+                                        <tr>
+                                          <td
+                                            align=""left""
+                                            style=""
+                                              padding: 0;
+                                              margin: 0;
+                                              padding-top: 20px;
+                                              padding-left: 20px;
+                                              padding-right: 20px;
+                                            ""
+                                          >
+                                            <table
+                                              width=""100%""
+                                              cellspacing=""0""
+                                              cellpadding=""0""
+                                              style=""
+                                                mso-table-lspace: 0pt;
+                                                mso-table-rspace: 0pt;
+                                                border-collapse: collapse;
+                                                border-spacing: 0px;
+                                              ""
+                                            >
+                                              <tr>
+                                                <td
+                                                  valign=""top""
+                                                  align=""center""
+                                                  style=""padding: 0; margin: 0; width: 560px""
+                                                >
+                                                  <table
+                                                    width=""100%""
+                                                    cellspacing=""0""
+                                                    cellpadding=""0""
+                                                    style=""
+                                                      mso-table-lspace: 0pt;
+                                                      mso-table-rspace: 0pt;
+                                                      border-collapse: collapse;
+                                                      border-spacing: 0px;
+                                                    ""
+                                                  >
+                                                    <tr>
+                                                      <td
+                                                        align=""left""
+                                                        style=""padding: 0; margin: 0""
+                                                      >
+                                                        <h2
+                                                          style=""
+                                                            margin: 0;
+                                                            line-height: 40px;
+                                                            mso-line-height-rule: exactly;
+                                                            font-family: arial, 'helvetica neue',
+                                                              helvetica, sans-serif;
+                                                            font-size: 20px;
+                                                            font-style: normal;
+                                                            font-weight: normal;
+                                                            color: #333333;
+                                                          ""
+                                                        >
+                                                          <strong>Riassunto dei servizi per "&Gallery.Selected.Cliente&"</strong>
+                                                        </h2>
+                                                        <p
+                                                          style=""
+                                                            margin: 0;
+                                                            -webkit-text-size-adjust: none;
+                                                            -ms-text-size-adjust: none;
+                                                            mso-line-height-rule: exactly;
+                                                            font-family: arial, 'helvetica neue',
+                                                              helvetica, sans-serif;
+                                                            line-height: 28px;
+                                                            color: #333333;
+                                                            font-size: 14px;
+                                                          ""
+                                                        >
+                                                          <strong
+                                                            >Vendita messa in servizio:
+                                                          </strong>
+                                                          "&Round(Value(Gallery.Selected.'Vendita messa in servizio TOTALE',"en"),0)&" €"&"<br /><strong
+                                                            >Vendita annuale:
+                                                          </strong>
+                                                          "&Round(Value(Gallery.Selected.'Vendita annuale TOTALE',"en"),0)&" €"&"
+                                                        </p>
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td
+                                                        align=""center""
+                                                        style=""
+                                                          padding: 20px;
+                                                          margin: 0;
+                                                          font-size: 0px;
+                                                        ""
+                                                      >
+                                                        <table
+                                                          border=""0""
+                                                          width=""40%""
+                                                          height=""100%""
+                                                          cellpadding=""0""
+                                                          cellspacing=""0""
+                                                          style=""
+                                                            mso-table-lspace: 0pt;
+                                                            mso-table-rspace: 0pt;
+                                                            border-collapse: collapse;
+                                                            border-spacing: 0px;
+                                                          ""
+                                                        >
+                                                          <tr>
+                                                            <td
+                                                              style=""
+                                                                padding: 0;
+                                                                margin: 0;
+                                                                border-bottom: 3px solid #00ffb9;
+                                                                background: unset;
+                                                                height: 1px;
+                                                                width: 100%;
+                                                                margin: 0px;
+                                                              ""
+                                                            ></td>
+                                                          </tr>
+                                                        </table>
+                                                      </td>
+                                                    </tr>"
+                                                    //APA
+                                                    &If(Value(Gallery.Selected.'Vendita annuale APA',"en")>0,"
+                                                    <tr>
+                                                      <td
+                                                        align=""left""
+                                                        style=""padding: 0; margin: 0""
+                                                      >
+                                                        <h3
+                                                          style=""
+                                                            margin: 0;
+                                                            line-height: 30px;
+                                                            mso-line-height-rule: exactly;
+                                                            font-family: arial, 'helvetica neue',
+                                                              helvetica, sans-serif;
+                                                            font-size: 20px;
+                                                            font-style: normal;
+                                                            font-weight: normal;
+                                                            color: #333333;
+                                                          ""
+                                                        >
+                                                          <br /><strong
+                                                            >Asset Performance Advisor</strong
+                                                          >
+                                                        </h3>
+                                                        <p
+                                                          style=""
+                                                            margin: 0;
+                                                            -webkit-text-size-adjust: none;
+                                                            -ms-text-size-adjust: none;
+                                                            mso-line-height-rule: exactly;
+                                                            font-family: arial, 'helvetica neue',
+                                                              helvetica, sans-serif;
+                                                            line-height: 21px;
+                                                            color: #333333;
+                                                            font-size: 14px;
+                                                          ""
+                                                        >
+                                                          <strong
+                                                            >Vendita messa in
+                                                            servizio:&nbsp;</strong
+                                                          >"&Round(Value(Gallery.Selected.'Vendita messa in servizio APA',"en"),0)&" €"&"<br /><strong
+                                                            >Vendita annuale:&nbsp;</strong
+                                                          >"&Round(Value(Gallery.Selected.'Vendita annuale APA',"en"),0)&" €"&"
+                                                        </p>
+                                                      </td>
+                                                    </tr>")
+                                                    //EPI
+                                                    &If(Value(Gallery.Selected.'Vendita annuale EPI',"en")>0,"
+                                                    <tr>
+                                                      <td
+                                                        align=""left""
+                                                        style=""padding: 0; margin: 0""
+                                                      >
+                                                        <h3
+                                                          style=""
+                                                            margin: 0;
+                                                            line-height: 30px;
+                                                            mso-line-height-rule: exactly;
+                                                            font-family: arial, 'helvetica neue',
+                                                              helvetica, sans-serif;
+                                                            font-size: 20px;
+                                                            font-style: normal;
+                                                            font-weight: normal;
+                                                            color: #333333;
+                                                          ""
+                                                        >
+                                                          <br /><strong
+                                                            >Energy Performance Insights</strong
+                                                          >
+                                                        </h3>
+                                                        <p
+                                                          style=""
+                                                            margin: 0;
+                                                            -webkit-text-size-adjust: none;
+                                                            -ms-text-size-adjust: none;
+                                                            mso-line-height-rule: exactly;
+                                                            font-family: arial, 'helvetica neue',
+                                                              helvetica, sans-serif;
+                                                            line-height: 21px;
+                                                            color: #333333;
+                                                            font-size: 14px;
+                                                          ""
+                                                        >
+                                                          <strong
+                                                            >Vendita messa in
+                                                            servizio:&nbsp;</strong
+                                                          >"&Round(Value(Gallery.Selected.'Vendita messa in servizio EPI',"en"),0)&" €"&"<br /><strong
+                                                            >Vendita annuale:&nbsp;</strong
+                                                          >"&Round(Value(Gallery.Selected.'Vendita annuale EPI',"en"),0)&" €"&"
+                                                        </p>
+                                                      </td>
+                                                    </tr>
+                                                    ")
+                                                    //DP
+                                                    &If(Value(Gallery.Selected.'Vendita annuale DP',"en")>0,"
+                                                    <tr>
+                                                      <td
+                                                        align=""left""
+                                                        style=""padding: 0; margin: 0""
+                                                      >
+                                                        <h3
+                                                          style=""
+                                                            margin: 0;
+                                                            line-height: 30px;
+                                                            mso-line-height-rule: exactly;
+                                                            font-family: arial, 'helvetica neue',
+                                                              helvetica, sans-serif;
+                                                            font-size: 20px;
+                                                            font-style: normal;
+                                                            font-weight: normal;
+                                                            color: #333333;
+                                                          ""
+                                                        >
+                                                          <br /><strong>Desigo Performance</strong>
+                                                        </h3>
+                                                        <p
+                                                          style=""
+                                                            margin: 0;
+                                                            -webkit-text-size-adjust: none;
+                                                            -ms-text-size-adjust: none;
+                                                            mso-line-height-rule: exactly;
+                                                            font-family: arial, 'helvetica neue',
+                                                              helvetica, sans-serif;
+                                                            line-height: 21px;
+                                                            color: #333333;
+                                                            font-size: 14px;
+                                                          ""
+                                                        >
+                                                          <strong
+                                                            >Vendita messa in
+                                                            servizio:&nbsp;</strong
+                                                          >"&Round(Value(Gallery.Selected.'Vendita messa in servizio DP',"en"),0)&" €"&"<br /><strong
+                                                            >Vendita annuale:&nbsp;</strong
+                                                          >"&Round(Value(Gallery.Selected.'Vendita annuale DP',"en"),0)&" €"&"
+                                                        </p>
+                                                      </td>
+                                                    </tr>
+                                                    ")
+                                                    //ZPO
+                                                    &If(Value(Gallery.Selected.'Vendita annuale ZPO',"en")>0,"
+                                                    <tr>
+                                                      <td
+                                                        align=""left""
+                                                        style=""padding: 0; margin: 0""
+                                                      >
+                                                        <h3
+                                                          style=""
+                                                            margin: 0;
+                                                            line-height: 30px;
+                                                            mso-line-height-rule: exactly;
+                                                            font-family: arial, 'helvetica neue',
+                                                              helvetica, sans-serif;
+                                                            font-size: 20px;
+                                                            font-style: normal;
+                                                            font-weight: normal;
+                                                            color: #333333;
+                                                          ""
+                                                        >
+                                                          <br /><strong
+                                                            >Zone Performance Optimization</strong
+                                                          >
+                                                        </h3>
+                                                        <p
+                                                          style=""
+                                                            margin: 0;
+                                                            -webkit-text-size-adjust: none;
+                                                            -ms-text-size-adjust: none;
+                                                            mso-line-height-rule: exactly;
+                                                            font-family: arial, 'helvetica neue',
+                                                              helvetica, sans-serif;
+                                                            line-height: 21px;
+                                                            color: #333333;
+                                                            font-size: 14px;
+                                                          ""
+                                                        >
+                                                          <strong
+                                                            >Vendita messa in
+                                                            servizio:&nbsp;</strong
+                                                          >"&Round(Value(Gallery.Selected.'Vendita messa in servizio ZPO',"en"),0)&" €"&"<br /><strong
+                                                            >Vendita annuale:&nbsp;</strong
+                                                          >"&Round(Value(Gallery.Selected.'Vendita annuale ZPO',"en"),0)&" €"&"
+                                                        </p>
+                                                      </td>
+                                                    </tr>
+                                                    ")&"
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                                <table
+                                  class=""es-footer""
+                                  cellspacing=""0""
+                                  cellpadding=""0""
+                                  align=""center""
+                                  style=""
+                                    mso-table-lspace: 0pt;
+                                    mso-table-rspace: 0pt;
+                                    border-collapse: collapse;
+                                    border-spacing: 0px;
+                                    table-layout: fixed !important;
+                                    width: 100%;
+                                    background-color: transparent;
+                                    background-repeat: repeat;
+                                    background-position: center top;
+                                  ""
+                                >
+                                  <tr>
+                                    <td align=""center"" style=""padding: 0; margin: 0"">
+                                      <table
+                                        class=""es-footer-body""
+                                        cellspacing=""0""
+                                        cellpadding=""0""
+                                        bgcolor=""#ffffff""
+                                        align=""center""
+                                        style=""
+                                          mso-table-lspace: 0pt;
+                                          mso-table-rspace: 0pt;
+                                          border-collapse: collapse;
+                                          border-spacing: 0px;
+                                          background-color: #ffffff;
+                                          width: 600px;
+                                        ""
+                                      >
+                                        <tr>
+                                          <td align=""left"" style=""padding: 40px; margin: 0"">
+                                            <table
+                                              cellspacing=""0""
+                                              cellpadding=""0""
+                                              width=""100%""
+                                              style=""
+                                                mso-table-lspace: 0pt;
+                                                mso-table-rspace: 0pt;
+                                                border-collapse: collapse;
+                                                border-spacing: 0px;
+                                              ""
+                                            >
+                                              <tr>
+                                                <td
+                                                  align=""left""
+                                                  style=""padding: 0; margin: 0; width: 520px""
+                                                >
+                                                  <table
+                                                    width=""100%""
+                                                    cellspacing=""0""
+                                                    cellpadding=""0""
+                                                    style=""
+                                                      mso-table-lspace: 0pt;
+                                                      mso-table-rspace: 0pt;
+                                                      border-collapse: collapse;
+                                                      border-spacing: 0px;
+                                                    ""
+                                                  >
+                                                    <tr>
+                                                      <td
+                                                        align=""center""
+                                                        style=""padding: 0; margin: 0""
+                                                      >
+                                                        <span
+                                                          class=""es-button-border""
+                                                          style=""
+                                                            border-style: solid;
+                                                            border-color: #2cb543;
+                                                            background: #00ffb9;
+                                                            border-width: 0px;
+                                                            display: inline-block;
+                                                            border-radius: 10px;
+                                                            width: auto;
+                                                          ""
+                                                          ><a
+                                                            href=""https://apps.powerapps.com/play/"&AppId&"?offerId="&currentRecord.ID&"""
+                                                            class=""es-button""
+                                                            target=""_blank""
+                                                            style=""
+                                                              mso-style-priority: 100 !important;
+                                                              text-decoration: none;
+                                                              -webkit-text-size-adjust: none;
+                                                              -ms-text-size-adjust: none;
+                                                              mso-line-height-rule: exactly;
+                                                              color: #000028;
+                                                              font-size: 18px;
+                                                              border-style: solid;
+                                                              border-color: #00ffb9;
+                                                              border-width: 10px 20px 10px 20px;
+                                                              display: inline-block;
+                                                              background: #00ffb9;
+                                                              border-radius: 10px;
+                                                              font-family: arial, 'helvetica neue',
+                                                                helvetica, sans-serif;
+                                                              font-weight: bold;
+                                                              font-style: normal;
+                                                              line-height: 22px;
+                                                              width: auto;
+                                                              text-align: center;
+                                                            ""
+                                                            >Visualizza i dettagli</a
+                                                          ></span
+                                                        >
+                                                      </td>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </body>
+                    
+                    ")
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedColor: =ColorFade(RGBA(0, 188, 242, 1), 30%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                Tooltip: ="Inviami Email riassuntiva"
+                Width: =50
+                X: =Parent.Width-Self.Width*3.5
+                Y: =(Parent.Height-Self.Height)/2
+                ZIndex: =5
+
+            feedback As groupContainer.manualLayoutContainer:
+                Height: =50
+                Width: =300
+                X: =(Parent.Width-Self.Width)/2
+                Y: =(Parent.Height-Self.Height)/2
+                ZIndex: =6
+
+                ButtonComponent_5 As ButtonComponent:
+                    ButtonText: ="invia Feedback"
+                    FillColor: =Colors.Primary2
+                    Height: =Parent.Height
+                    Icon: |-
+                        ={IconImage: Icon.LikeDislike}
+                    TextColor: =Colors.Primary1
+                    Width: =Parent.Width
+
+                Button2_6 As button:
+                    BorderColor: =Colors.Primary1
+                    BorderThickness: =3
+                    Color: =Colors.Primary1
+                    Fill: =RGBA(0,0,0,0)
+                    Height: =Parent.Height
+                    HoverBorderColor: =Self.BorderColor
+                    HoverFill: =Colors.Raised
+                    OnSelect: |-
+                        =Launch("https://forms.office.com/r/Jfh6CvAh5y")
+                    PressedBorderColor: =Self.BorderColor
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Text: =""
+                    Width: =Parent.Width
+                    ZIndex: =2
+
+    delete_popup As groupContainer.manualLayoutContainer:
+        Height: =Parent.Height
+        Visible: =popupVisible
+        Width: =Parent.Width
+        ZIndex: =4
+
+        popup_bg_1 As label:
+            Fill: =RGBA(0, 0, 0, 0.7)
+            Height: =Parent.Height
+            Text: =""
+            Width: =Parent.Width
+            ZIndex: =1
+
+        Popup_1 As groupContainer.manualLayoutContainer:
+            BorderColor: =Colors.Primary1
+            BorderThickness: =2
+            Fill: =Colors.Primary2
+            X: =(Parent.Width-Self.Width)/2
+            Y: =(Parent.Height-Self.Height)/2
+            ZIndex: =2
+
+            Label6_1 As label:
+                Align: =Align.Center
+                Height: =110
+                PaddingLeft: =50
+                PaddingRight: =50
+                Text: ="Questa azione non può essere annullata. Sei sicuro di voler cancellare questa quotazione?"
+                Width: =Parent.Width
+                ZIndex: =1
+
+            annulla_1 As groupContainer.manualLayoutContainer:
+                Height: =Parent.Height/2
+                Width: =Parent.Width/2
+                Y: =Parent.Height/2
+                ZIndex: =6
+
+                Label7_3 As label:
+                    Height: =Parent.Height
+                    Text: ="Annulla"
+                    X: =100
+                    ZIndex: =1
+
+                Icon3_2 As icon.CancelBadge:
+                    Height: =50
+                    Icon: =Icon.CancelBadge
+                    OnSelect: |-
+                        =UpdateContext({popupVisible:false})
+                    Width: =50
+                    X: =(Parent.Height-Self.Width)/2
+                    Y: =(Parent.Height-Self.Height)/2
+                    ZIndex: =2
+
+            conferma_1 As groupContainer.manualLayoutContainer:
+                Height: =Parent.Height/2
+                Width: =Parent.Width/2
+                X: =Parent.Width/2
+                Y: =Parent.Height/2
+                ZIndex: =7
+
+                Label7_4 As label:
+                    Height: =Parent.Height
+                    Text: ="Conferma"
+                    Width: =125
+                    X: =100
+                    ZIndex: =1
+
+                Icon3_3 As icon.CancelBadge:
+                    Height: =50
+                    Icon: =Icon.CheckBadge
+                    OnSelect: |-
+                        =UpdateContext({popupVisible:false}); Remove(Digital_Services, Gallery.Selected);
+                        Reset(Gallery)
+                    Width: =50
+                    X: =(Parent.Height-Self.Width)/2
+                    Y: =(Parent.Height-Self.Height)/2
+                    ZIndex: =2
+

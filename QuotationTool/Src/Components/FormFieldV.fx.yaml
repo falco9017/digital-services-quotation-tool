@@ -1,0 +1,54 @@
+FormFieldV As CanvasComponent:
+    FieldValue: ="Text"
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =500
+    Padding: =10
+    TextColor: =RGBA(0, 0, 0, 1)
+    Title: ="Text"
+    Width: =100
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Container17 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutJustifyContent: =LayoutJustifyContent.Center
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =FormFieldV.Padding
+        PaddingLeft: =FormFieldV.Padding
+        PaddingRight: =FormFieldV.Padding
+        PaddingTop: =FormFieldV.Padding
+        Width: =Parent.Width
+        ZIndex: =1
+
+        title_1 As label:
+            AlignInContainer: =AlignInContainer.Start
+            BorderColor: =
+            Color: =FormFieldV.TextColor
+            DisabledColor: =
+            FontWeight: =FontWeight.Bold
+            Height: =60
+            PaddingBottom: =0
+            PaddingLeft: =10
+            PaddingTop: =10
+            Text: =FormFieldV.Title
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.Width-Container17.PaddingLeft*2
+            ZIndex: =1
+
+        value_1 As label:
+            AutoHeight: =true
+            BorderColor: =
+            Color: =FormFieldV.TextColor
+            DisabledColor: =
+            FillPortions: =1
+            PaddingBottom: =0
+            PaddingLeft: =10
+            PaddingTop: =0
+            Text: =FormFieldV.FieldValue
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.Width-Container17.PaddingLeft*2
+            Wrap: =false
+            ZIndex: =2
+

@@ -1,0 +1,122 @@
+INTRO As screen:
+    BackgroundImage: =Cognisphere_20220915_143724
+
+    appVersion As label:
+        Color: =Colors.Primary3
+        DisplayMode: =DisplayMode.View
+        Height: =37
+        Text: ="v."&IfError(AppVersion, "0")
+        Width: =53
+        X: =Parent.Width-Self.Width*2
+        Y: =Parent.Height-Self.Height*2
+        ZIndex: =6
+
+    Container1 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =25
+        LayoutJustifyContent: =LayoutJustifyContent.Center
+        LayoutMode: =LayoutMode.Auto
+        LayoutWrap: =true
+        PaddingBottom: =25
+        PaddingLeft: =25
+        PaddingRight: =25
+        PaddingTop: =25
+        Width: =Parent.Width
+        ZIndex: =11
+
+        titlecontainer As groupContainer.manualLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            FillPortions: =0
+            Height: =130
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            Width: =Parent.Width-25
+            X: =25
+            Y: =(Parent.Height-Self.Height-Search.Height*2)/2
+            ZIndex: =1
+
+            Label3 As label:
+                Fill: =Colors.Primary1
+                Height: =Parent.Height
+                Text: =
+                Width: =5
+                ZIndex: =1
+
+            Label4 As label:
+                Height: =Parent.Height
+                PaddingLeft: =15
+                Size: =If(App.ActiveScreen.Width<600, 30, 38)
+                Text: |-
+                    ="Digital Services 
+                    Quotation Tool"
+                Width: =Parent.Width
+                ZIndex: =2
+
+        New As groupContainer.manualLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            FillPortions: =0
+            Height: =60
+            LayoutMinHeight: =100
+            LayoutMinWidth: =40
+            Width: =340
+            X: =25
+            ZIndex: =2
+
+            ButtonComponent_2 As ButtonComponent:
+                ButtonText: ="Nuova quotazione"
+                FillColor: =Colors.Primary1
+                Height: =Parent.Height
+                TextColor: =Colors.Primary2
+                Width: =Parent.Width
+
+            Button2_3 As button:
+                BorderStyle: =BorderStyle.None
+                Color: =Colors.Primary1
+                Fill: =RGBA(0,0,0,0)
+                Height: =Parent.Height
+                OnSelect: |-
+                    =ResetForm(Form_MAIN);
+                    NewForm(Form_MAIN);
+                    Navigate(MAIN, Cover)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Text: =""
+                Width: =Parent.Width
+                ZIndex: =2
+
+        Search As groupContainer.manualLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            FillPortions: =0
+            Height: =60
+            LayoutMinHeight: =100
+            LayoutMinWidth: =40
+            Visible: =Not(IsEmpty(Filter(Digital_Services, 'Created By'.Email=User().Email)))
+            Width: =340
+            X: =25
+            ZIndex: =3
+
+            ButtonComponent_1 As ButtonComponent:
+                ButtonText: ="Cerca quotazione"
+                FillColor: =Colors.Primary1
+                Height: =Parent.Height
+                Icon: |-
+                    ={IconImage: Icon.Search}
+                TextColor: =Colors.Primary2
+                Width: =Parent.Width
+
+            Button2_2 As button:
+                BorderStyle: =BorderStyle.None
+                Fill: =RGBA(0,0,0,0)
+                Height: =Parent.Height
+                OnSelect: =Navigate(RECAP, Cover)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Text: =""
+                Width: =Parent.Width
+                ZIndex: =2
+

@@ -1,0 +1,41 @@
+RaisedWindow As CanvasComponent:
+    Color: =RGBA(0, 0, 0, 1)
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =640
+    Padding: =10
+    Radius: =10
+    Width: =640
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    TextInput5 As text:
+        BorderColor: =
+        BorderStyle: =
+        BorderThickness: =
+        Color: =
+        Default: =""
+        DisabledBorderColor: =
+        DisabledColor: =
+        DisabledFill: =
+        Fill: =RaisedWindow.Color
+        FocusedBorderColor: =
+        FocusedBorderThickness: =
+        Height: =Parent.Height-RaisedWindow.Padding*2
+        HoverBorderColor: =
+        HoverColor: =
+        PaddingBottom: =0
+        PaddingLeft: =0
+        PaddingRight: =0
+        PaddingTop: =0
+        PressedBorderColor: =
+        PressedColor: =
+        RadiusBottomLeft: =RaisedWindow.Radius
+        RadiusBottomRight: =RaisedWindow.Radius
+        RadiusTopLeft: =RaisedWindow.Radius
+        RadiusTopRight: =RaisedWindow.Radius
+        Width: =Parent.Width-RaisedWindow.Padding*2
+        X: =RaisedWindow.Padding
+        Y: =RaisedWindow.Padding
+        ZIndex: =1
+
